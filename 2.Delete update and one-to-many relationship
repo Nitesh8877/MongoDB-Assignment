@@ -10,6 +10,8 @@ user
 db.data.find()
 
 //insert one record into collection
+
+//and here is modify the data and set the one-to-many relationship
 db.data.insertOne({
   "name": "John",
   "email": "john@example.com",
