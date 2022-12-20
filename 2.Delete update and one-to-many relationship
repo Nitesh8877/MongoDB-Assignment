@@ -1,0 +1,180 @@
+show collections
+address
+cars
+data
+guest
+newDb
+user
+
+//find all the records into the collection
+db.data.find()
+
+//insert one record into collection
+db.data.insertOne({
+  "name": "John",
+  "email": "john@example.com",
+  "addresses": [
+    {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10001"
+    },
+    {
+      "street": "456 Park Ave",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10002"
+    }
+  ]
+}
+)
+
+{ acknowledged: true,
+  insertedId: ObjectId("63a169d81eb0141766bbfd18") }
+  
+  
+  //find all the records into the collection
+db.data.find()
+{ _id: ObjectId("63a169d81eb0141766bbfd18"),
+  name: 'John',
+  email: 'john@example.com',
+  addresses: 
+   [ { street: '123 Main St',
+       city: 'New York',
+       state: 'NY',
+       zip: '10001' },
+     { street: '456 Park Ave',
+       city: 'New York',
+       state: 'NY',
+       zip: '10002' } ] }
+       
+ //Update the one record based on id
+db.data.updateOne({ _id:ObjectId("63a169d81eb0141766bbfd18") }, { $push: { addresses: { street: "789 Market St", city: "San Francisco", state: "CA", zip: "94103" } } });
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+db.data.find()
+{ _id: ObjectId("63a169d81eb0141766bbfd18"),
+  name: 'John',
+  email: 'john@example.com',
+  addresses: 
+   [ { street: '123 Main St',
+       city: 'New York',
+       state: 'NY',
+       zip: '10001' },
+     { street: '456 Park Ave',
+       city: 'New York',
+       state: 'NY',
+       zip: '10002' },
+     { street: '789 Market St',
+       city: 'San Francisco',
+       state: 'CA',
+       zip: '94103' } ] }
+       
+ //insert one records into the collection
+db.data.insertOne({name:"Nitesh",email:"kumarnitehs88441@gmail.com",address:[{street:"kaimur bihar",city:"ramgarh",state:"bihar",pinCode:'802132'}]})
+{ acknowledged: true,
+  insertedId: ObjectId("63a16a781eb0141766bbfd19") }
+  
+  
+//show the all record into the collection
+db.data.find()
+{ _id: ObjectId("63a169d81eb0141766bbfd18"),
+  name: 'John',
+  email: 'john@example.com',
+  addresses: 
+   [ { street: '123 Main St',
+       city: 'New York',
+       state: 'NY',
+       zip: '10001' },
+     { street: '456 Park Ave',
+       city: 'New York',
+       state: 'NY',
+       zip: '10002' },
+     { street: '789 Market St',
+       city: 'San Francisco',
+       state: 'CA',
+       zip: '94103' } ] }
+{ _id: ObjectId("63a16a781eb0141766bbfd19"),
+  name: 'Nitesh',
+  email: 'kumarnitehs88441@gmail.com',
+  address: 
+   [ { street: 'kaimur bihar',
+       city: 'ramgarh',
+       state: 'bihar',
+       pinCode: '802132' } ] }
+       
+  //insert one records into the collection
+db.data.insertOne({name:"madhu",email:"kumarnitehs88441@gmail.com",address:[{street:"kaimur bihar",city:"ramgarh",state:"bihar",pinCode:'802132'}]})
+{ acknowledged: true,
+  insertedId: ObjectId("63a16a8e1eb0141766bbfd1a") }
+db.data.find()
+{ _id: ObjectId("63a169d81eb0141766bbfd18"),
+  name: 'John',
+  email: 'john@example.com',
+  addresses: 
+   [ { street: '123 Main St',
+       city: 'New York',
+       state: 'NY',
+       zip: '10001' },
+     { street: '456 Park Ave',
+       city: 'New York',
+       state: 'NY',
+       zip: '10002' },
+     { street: '789 Market St',
+       city: 'San Francisco',
+       state: 'CA',
+       zip: '94103' } ] }
+{ _id: ObjectId("63a16a781eb0141766bbfd19"),
+  name: 'Nitesh',
+  email: 'kumarnitehs88441@gmail.com',
+  address: 
+   [ { street: 'kaimur bihar',
+       city: 'ramgarh',
+       state: 'bihar',
+       pinCode: '802132' } ] }
+{ _id: ObjectId("63a16a8e1eb0141766bbfd1a"),
+  name: 'madhu',
+  email: 'kumarnitehs88441@gmail.com',
+  address: 
+   [ { street: 'kaimur bihar',
+       city: 'ramgarh',
+       state: 'bihar',
+       pinCode: '802132' } ] }
+       
+       
+       
+ //Delete one record into the collection
+db.data.deleteOne({_id: ObjectId("63a16a8e1eb0141766bbfd1a")})
+{ acknowledged: true, deletedCount: 1 }
+
+
+//find the all records into the collection
+db.data.find()
+{ _id: ObjectId("63a169d81eb0141766bbfd18"),
+  name: 'John',
+  email: 'john@example.com',
+  addresses: 
+   [ { street: '123 Main St',
+       city: 'New York',
+       state: 'NY',
+       zip: '10001' },
+     { street: '456 Park Ave',
+       city: 'New York',
+       state: 'NY',
+       zip: '10002' },
+     { street: '789 Market St',
+       city: 'San Francisco',
+       state: 'CA',
+       zip: '94103' } ] }
+{ _id: ObjectId("63a16a781eb0141766bbfd19"),
+  name: 'Nitesh',
+  email: 'kumarnitehs88441@gmail.com',
+  address: 
+   [ { street: 'kaimur bihar',
+       city: 'ramgarh',
+       state: 'bihar',
+       pinCode: '802132' } ] }
