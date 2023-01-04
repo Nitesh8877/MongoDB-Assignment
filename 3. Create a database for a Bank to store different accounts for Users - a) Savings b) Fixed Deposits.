@@ -1,0 +1,48 @@
+for (i = 0; i <=500; ++i) {
+type = ["Credit", "Debit"];
+descriptionWords = [
+"entertainment",
+"house",
+"medical",
+"rent",
+"travel",
+"Salary",
+];
+var transaction = {
+userId: i,
+username: "user" + "_" + i,
+age: Math.floor(Math.random() * 100),
+createdAt: new Date(),
+modifiedAt: new Date(),
+amount: Math.floor(Math.random() * 50000),
+transactionType: type[Math.floor(Math.random() * 1)],
+description:
+descriptionWords[Math.floor(Math.random() *
+descriptionWords.length)],
+};
+db.Transaction.insertOne(transaction);
+}
+
+1) Look up all the transactions performed by the user between two dates
+db.Transaction.find({ createdAt: { $gte: ISODate("2022-01-01") } })
+
+Create an index to speed up query
+db.Transaction.createIndex({ createdAt: 1 })
+
+2) Find all the transactions exceeding Rs. 10000
+db.Transaction.find({ amount: { "$gt": 10000 } })
+db.Transaction.createIndex({ amount: 1 })
+
+
+3) Search transactions using key words such as
+a) Credits for salary - “salary”
+b) House expenses - “House”
+c) Entertainment - “movies”, “Netflix”
+db.Transaction.createIndex({ description: "text" })
+db.Transaction.find({ $text: { $search: "rent" } })
+
+
+4) Find all the transactions between two dates and sort them by the amount in ascending order
+db.Transaction.createIndex({ createdAt: 1, amount: 1 })
+db.Transaction.find({ createdAt: { $gte: ISODate("2022-01-01"), "$lt":
+ISODate("2022-03-14") } }).sort({ amount: 1 })
