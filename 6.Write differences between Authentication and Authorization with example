@@ -1,0 +1,29 @@
+Write differences between Authentication and Authorization with example
+
+Authenntication-> authentication is the process of verifying the identity of a user or device.
+                  This usually involves the user providing a set of credentials, such as a 
+                  username and password which are checked against a database of valid credentials.
+                  If the proviede credentials are valid, the user is considered authenticated and is 
+                  granted access to the resource.
+                
+                
+ Authorization-> Authorization is the process of granting or denying acess to a resource based on the
+                 authenticated user's permissions. This can involve checking the user's role or group
+                 membership to determine what actions they are allowed to perform.
+                 
+                 
+                 
+                 Example-> 
+                 
+                 Imagine a website that allows registered users to create and publish articles.The 
+                 website has a login page that users cac access by entering their username and 
+                 password. This is the authentication process.
+                 
+                 Once a user is authenticated, they can access the article creation and publishing geatures 
+                 of the website. However, not all users have the same permissions. Some users may only be
+                 able to create articles, while otheres may have the additional permission to puclish article
+                 that they have created. This is the authorization process.
+                 
+                 In this summary , Authentication process verifies the user's identity and grants them access to 
+                 the website. The authorization process then determines what actions the user is allowed to perform based on theri
+                permissions
