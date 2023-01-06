@@ -1,0 +1,28 @@
+
+
+          const User=require("./models");
+          app.put("/api/update/:userId, async(req,res)=>{
+                let userId=req.params.userId;
+                let user;
+                 try {
+                 user=await findOne({
+                 _id:userId
+                 })?
+                 user.email=req.body.email!=undefined?req.body.email:user.email
+                 user.userType:user.userType!=undefined?req.body.userType:user.userType
+                 user.userStatus:user.userStatus!=undefined?req.body.userStatus:user.userStatus
+                 res.status(200).send({
+                 message:"User data update successfully"
+                 })
+                 
+                
+            } catch (error) {
+            console.log(error);
+            res.status(500).send({
+            message:"Some internal error occured!"
+            })
+                
+            }
+                
+            })
+          
