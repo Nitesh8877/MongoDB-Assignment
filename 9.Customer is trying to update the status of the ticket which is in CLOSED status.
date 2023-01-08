@@ -1,1 +1,23 @@
-APi
+
+exports.updateTicket = async (req, res) => {
+    const ticket = await Ticket.findOne({
+        _id: req.params.id
+    })
+    const saveUser = await User.findOne({
+        userId: req.body.userId
+    })
+   
+    if (canUpdate(saveUser, ticket)) {
+      if(ticket.status=="CLOSED"){
+        res.status(200).send({
+        message:"Ticket Status is closed and not update further!"
+        });
+        }
+    }
+}
+
+const canUpdate = (user, ticket) => {
+    return user.userId == ticket.reporter ||
+        user.userId == ticket.assignee ||
+        user.userType == constants.userTypes.admin
+}
