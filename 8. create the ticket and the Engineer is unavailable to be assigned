@@ -1,3 +1,54 @@
-Api->
+const Ticket = require("../models/ticket.model")
 
+exports.createTicket = async (req, res) => {
+    const ticketObject = {
+        title: req.body.title,
+        ticketPriority: req.body.ticketPriority,
+        description: req.body.description,
+        status: req.body.status,
+        reporter: req.body.userId,
+    }
+    console.log('ticket', ticketObject)
+    const engineer = await User.findOne({
+        userType: constants.userTypes.engineer,
+        userStatus: constants.userStatus.approved
+    })
+     if(!engineer) {
+     res.status(401).send({
+     message:"Engineer Not Available"
+     })
+     reutrn;
+     }
       
+    ticketObject.assignee = engineer.userId
+    console.log('ticket', ticketObject)
+    console.log("engineer", engineer)
+    try {
+        const ticket = await Ticket.create(ticketObject)
+
+        if (ticket) {
+            const user = await User.findOne({
+                userId: req.body.userId
+            })
+            user.ticketsCreated.push(ticket._id)
+            await user.save()
+
+            engineer.ticketsAssigned.push(ticket._id)
+            await engineer.save()
+            
+            sendEmail(ticket._id,
+                `Ticket with id: ${ticket._id} created`,
+                ticket.description,
+                user.email+","+engineer.email,
+                user.email
+                )
+
+            res.status(201).send(objectConverter.ticketResponse(ticket))
+        }
+    } catch (err) {
+        console.log("Some error happened while creating ticket", err.message)
+        res.status(500).send({
+            message: 'Some internal server error'
+        })
+    }
+}
