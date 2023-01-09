@@ -1,0 +1,22 @@
+
+exports.ticketPriority=async(req,res)=>{
+
+    let ticket
+    try {
+        ticket =await Ticket.find();
+        if(ticket){
+            ticket.sort((a,b)=>a.ticketPriority-b.ticketPriority);
+            res.status(200).send(ticket);
+        }else{
+            res.status(200).send({
+                message:"Ticket are not available"
+            })
+        }
+    } catch (error) {
+        
+        res.status(500).send({
+            message:"Some internal error occured"
+        })
+    }
+
+}
